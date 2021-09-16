@@ -1,0 +1,126 @@
+import pandas as pd
+import os
+import seaborn as sn
+import matplotlib.pyplot as plt
+import csv
+
+df = pd.read_csv(os.path.join(os.getcwd(), 'data_ah_csv.csv', ))
+
+def stat_price():  
+
+    meanPrice = df['Price'].mean()
+    sumPrice = df['Price'].sum()
+    maxPrice = df['Price'].max()
+    minPrice = df['Price'].min()
+    countPrice = df['Price'].count()
+    medianPrice = df['Price'].median() 
+    stdPrice = df['Price'].std() 
+    varPrice = df['Price'].var()
+    print ('Mean Price: ' + str(meanPrice))
+    print ('Sum of Price: ' + str(sumPrice))
+    print ('Max Price: ' + str(maxPrice))
+    print ('Min Price: ' + str(minPrice))
+    print ('Count of Price: ' + str(countPrice))
+    print ('Median Price: ' + str(medianPrice))
+    print ('Std of Price: ' + str(stdPrice))
+    print ('Var of Price: ' + str(varPrice))
+
+def stat_quality():
+    meanQuality = df['Quality'].mean()
+    sumQuality = df['Quality'].sum()
+    maxQuality = df['Quality'].max()
+    minQuality = df['Quality'].min()
+    countQuality = df['Quality'].count()
+    medianQuality = df['Quality'].median() 
+    stdQuality = df['Quality'].std() 
+    varQuality = df['Quality'].var()
+    print ('Mean Quality: ' + str(meanQuality))
+    print ('Sum of Quality: ' + str(sumQuality))
+    print ('Max Quality: ' + str(maxQuality))
+    print ('Min Quality: ' + str(minQuality))
+    print ('Count of Quality: ' + str(countQuality))
+    print ('Median Quality: ' + str(medianQuality))
+    print ('Std of Quality: ' + str(stdQuality))
+    print ('Var of Quality: ' + str(varQuality))
+
+def stat_service():
+    meanService = df['Service'].mean()
+    sumService = df['Service'].sum()
+    maxService = df['Service'].max()
+    minService = df['Service'].min()
+    countService = df['Service'].count()
+    medianService = df['Service'].median() 
+    stdService = df['Service'].std() 
+    varService = df['Service'].var() 
+
+    print ('Mean Service: ' + str(meanService))
+    print ('Sum of Service: ' + str(sumService))
+    print ('Max Service: ' + str(maxService))
+    print ('Min Service: ' + str(minService))
+    print ('Count of Service: ' + str(countService))
+    print ('Median Service: ' + str(medianService))
+    print ('Std of Service: ' + str(stdService))
+    print ('Var of Service: ' + str(varService))
+
+def stat_assortment():
+    meanAssortment = df['Assortment'].mean()
+    sumAssortment = df['Assortment'].sum()
+    maxAssortment = df['Assortment'].max()
+    minAssortment = df['Assortment'].min()
+    countAssortment = df['Assortment'].count()
+    medianAssortment = df['Assortment'].median() 
+    stdAssortment = df['Assortment'].std() 
+    varAssortment = df['Assortment'].var()
+
+    print ('Mean Assortment: ' + str(meanAssortment))
+    print ('Sum of Assortment: ' + str(sumAssortment))
+    print ('Max Assortment: ' + str(maxAssortment))
+    print ('Min Assortment: ' + str(minAssortment))
+    print ('Count of Assortment: ' + str(countAssortment))
+    print ('Median Assortment: ' + str(medianAssortment))
+    print ('Std of Assortment: ' + str(stdAssortment))
+    print ('Var of Assortment: ' + str(varAssortment))  
+
+def stat_age():
+    meanAge = df['Age'].mean()
+    sumAge = df['Age'].sum()
+    maxAge = df['Age'].max()
+    minAge = df['Age'].min()
+    countAge = df['Age'].count()
+    medianAge = df['Age'].median() 
+    stdAge = df['Age'].std() 
+    varAge = df['Age'].var() 
+
+    print ('Mean Age: ' + str(meanAge))
+    print ('Sum of Age: ' + str(sumAge))
+    print ('Max Age: ' + str(maxAge))
+    print ('Min Age: ' + str(minAge))
+    print ('Count of Age: ' + str(countAge))
+    print ('Median Age: ' + str(medianAge))
+    print ('Std of Age: ' + str(stdAge))
+    print ('Var of Age: ' + str(varAge))
+
+def nps():
+    promotors = 0
+    detractors = 0
+    total = 30
+
+    for x in df['NPS']:
+        if x <= 5: 
+            detractors += 1
+        elif x >= 8:
+            promotors += 1
+    
+    nps_score = (promotors / total * 100) - (detractors / total * 100)
+    return print('The Net Promotor Score is ' + str(nps_score))
+
+
+print(nps())
+print(stat_price())
+print(stat_quality())
+print(stat_service())
+print(stat_assortment())
+print(stat_age())
+corrMatrix = df.corr()
+sn.heatmap(corrMatrix, annot=True)
+plt.show()
